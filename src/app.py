@@ -42,6 +42,7 @@ class Application:
         cls.app.add_url_rule(root_routes['index'], view_func=root_routes['index_controller'], endpoint='index')
         cls.app.add_url_rule(pets_routes['create'], view_func=pets_routes['create_controller'], methods=['POST'])
         cls.app.add_url_rule(root_routes['services'], view_func=root_routes['services_controller'], methods=['GET'])
+        cls.app.add_url_rule(root_routes['appointments'], view_func=root_routes['appointments_controller'])
         cls.__register_error_handlers()
     
     @classmethod

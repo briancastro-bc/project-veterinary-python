@@ -1,8 +1,9 @@
-from src.controllers import IndexController, NotFoundController, PetsController, ServicesController
+from src.controllers import IndexController, NotFoundController, PetsController, ServicesController, AppointmentsController
 
 root_routes = {
     "index": "/", "index_controller": IndexController.as_view('index'),
-    "services": "/services", "services_controller": ServicesController.as_view("services")
+    "services": "/services", "services_controller": ServicesController.as_view("services"),
+    "appointments": "/appointments", "appointments_controller": AppointmentsController.as_view("appointments")
 }
 
 pets_routes = {

@@ -1,7 +1,7 @@
 from flask import redirect, request, render_template, flash, url_for
 from flask.views import MethodView
 from src.hooks import verify_user
-from src.models import Services
+from src.models import Services, Appointment, User
 from src.database import db
 
 class PanelController(MethodView):
@@ -12,7 +12,8 @@ class PanelController(MethodView):
         pass
     
     def get(self):
-        return render_template('private/admin/panel.html')
+        appointments: Appointment = Appointment.query.all()
+        return render_template('private/admin/panel.html', appointments=appointments)
     
     def post(self):
         pass
@@ -43,3 +44,38 @@ class PanelServicesController(MethodView):
     
     def delete(self):
         pass
+
+class PanelUsersController(MethodView):
+    
+    def get(self):
+        users: User = User.query.all()
+        return render_template('private/admin/users.html', users=users)
+    
+    def post(self):
+        rol = request.form['rol']
+        uid = request.form['uid']
+        print(rol, uid)
+        try:
+            user: User = User.query.filter_by(uid=uid).first()
+            if user.is_admin:
+                user.is_admin = False
+                db.session.commit()
+                flash('Se ha actualizado el rol del usuario', 'success')
+                return redirect(url_for('admin.panel'))
+            user.is_admin = True
+            db.session.commit()
+            flash('Se ha actualizado el rol del usuario', 'success')
+        except Exception:
+            flash('Ha ocurrido un error', 'error')
+        return redirect(url_for('admin.panel'))
+
+class AppointmentsDeleteController(MethodView):
+    
+    decorators = [verify_user(verify_role=True)]
+    
+    def get(self, uid):
+        appointment: Appointment = Appointment.query.filter_by(uid=uid).first()
+        db.session.delete(appointment)
+        db.session.commit()
+        flash('Se ha cancelado la cita', 'success')
+        return redirect(url_for('admin.panel'))

@@ -2,125 +2,114 @@
 
 {% block title %}Panel{% endblock %}
 {% block content %}
-    <main id="admin-content">
-        <div class="container-sm">
-            <div class="row g-0">
-                <div class="col-lg-4 d-flex align-items-center">
-                    <div class="content-config mx-auto align-self-center justify-content-center p-5">
-                        <div class="card testimonial-card text-center bg-dark z-depth-5">
-                            <div class="card-body">
-                                <div class="card-title text-white pt-3 px-5">
-                                    <p class="h3">
-                                        {{ session['username'] }}
-                                    </p>
-                                    <p class="h5 text-muted" data-toggle="tooltip" title="Cargo">
-                                        Administrador: {{ session['user_role'] }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <i class="fas fa-eye"></i> Ver usuarios
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action" data-toggle="modal"
-                                    data-target="#createServiceModal">
-                                    <i class="fas fa-comments-dollar"></i> Crear Servicios
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <i class="fas fa-tags"></i> Agregar productos
-                                </a>
-                                <a href="javascript: history.go(-1)" class="list-group-item list-group-item-action">
-                                    <i class="fas fa-undo"></i> Volver
-                                </a>
+<main id="admin-content">
+    <div class="container-sm">
+        <div class="row g-0">
+            <div class="col-lg-4 d-flex align-items-center">
+                <div class="content-config mx-auto align-self-center justify-content-center p-5">
+                    <div class="card testimonial-card text-center bg-dark z-depth-5">
+                        <div class="card-body">
+                            <div class="card-title text-white pt-3 px-5">
+                                <p class="h3">
+                                    {{ session['username'] }}
+                                </p>
+                                <p class="h5 text-muted" data-toggle="tooltip" title="Cargo">
+                                    Administrador: {{ session['user_role'] }}
+                                </p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-sm-8 d-flex">
-                    <div class="content-config align-self-center justify-content-center mx-auto my-5">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card text-center z-depth-5 w-100">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Categorias</h4>
-                                        <p class="card-text">
-                                            Asigna, crea y gestiona las categorias del sistema.
-                                        </p>
-                                        <a href="/categories" class="btn btn-dark btn-sm">
-                                            Ver <i class="fas fa-arrow-alt-circle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="card text-center z-depth-5 w-100">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Registradoras</h4>
-                                        <p class="card-text">
-                                            Asigna y gestiona las cajas registradoras del sistema.
-                                        </p>
-                                        <a href="/cash-registers" class="btn btn-dark btn-sm">
-                                            Ver <i class="fas fa-arrow-alt-circle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="card text-center z-depth-5 w-100">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Productos</h4>
-                                        <p class="card-text">
-                                            Visualiza, edita y elimina los productos del sistema.
-                                        </p>
-                                        <a href="/products" class="btn btn-dark btn-sm">
-                                            Ver <i class="fas fa-arrow-alt-circle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="list-group">
+                            <a href="{{url_for('admin.users')}}" class="list-group-item list-group-item-action">
+                                <i class="fas fa-eye"></i> Ver usuarios
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" data-toggle="modal"
+                                data-target="#createServiceModal">
+                                <i class="fas fa-comments-dollar"></i> Crear Servicios
+                            </a>
+                            <a href="javascript: history.go(-1)" class="list-group-item list-group-item-action">
+                                <i class="fas fa-undo"></i> Volver
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-    <div class="modal fade" id="createServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content bg-dark">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Crear servicio</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body mx-3">
-                    <form action="{{url_for('admin.services_create')}}" method="POST">
-                        <div class="md-form mb-5">
-                            <i class="fas fa-store-alt prefix text-white"></i>
-                            <input type="text" name="name" id="orangeForm-name" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="orangeForm-name">Nombre</label>
+            <div class="col-sm-8 d-flex">
+                <div class="content-config align-self-center justify-content-center mx-auto my-5">
+                    <div class="row">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-sm table-striped text-center">
+                                <thead class="black white-text">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Servicio</th>
+                                        <th scope="col">Mascota</th>
+                                        <th scope="col">Cita</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-light">
+                                    {% for appointment in appointments %}
+                                        <tr>
+                                            <td>{{appointment.uid}}</td>
+                                            <td>{{appointment.service}}</td>
+                                            <td>{{appointment.pet}}</td>
+                                            <td>{{appointment.to_day}}</td>
+                                            <td>
+                                                <a href="/admin/appointments/delete/{{appointment.uid}}" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <td>No hay citas</td>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="md-form mb-5">
-                            <i class="fas fa-image prefix text-white"></i>
-                            <input type="url" name="image" id="orangeForm-image" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="orangeForm-name">Imagen</label>
-                        </div>
-                        <div class="md-form mb-5">
-                            <i class="fas fa-align-left prefix text-white"></i>
-                            <input type="text" name="description" id="orangeForm-email" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="orangeForm-email">Descripción</label>
-                        </div>
-                        <div class="md-form mb-4">
-                            <i class="fas fa-dollar-sign prefix text-white"></i>
-                            <input type="text" name="value" id="orangeForm-pass" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="orangeForm-pass">Valor</label>
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center">
-                            <button class="btn btn-primary">Guardar</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</main>
+<div class="modal fade" id="createServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Crear servicio</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <form action="{{url_for('admin.services_create')}}" method="POST">
+                    <div class="md-form mb-5">
+                        <i class="fas fa-store-alt prefix text-white"></i>
+                        <input type="text" name="name" id="orangeForm-name" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="orangeForm-name">Nombre</label>
+                    </div>
+                    <div class="md-form mb-5">
+                        <i class="fas fa-image prefix text-white"></i>
+                        <input type="url" name="image" id="orangeForm-image" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="orangeForm-name">Imagen</label>
+                    </div>
+                    <div class="md-form mb-5">
+                        <i class="fas fa-align-left prefix text-white"></i>
+                        <input type="text" name="description" id="orangeForm-email" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="orangeForm-email">Descripción</label>
+                    </div>
+                    <div class="md-form mb-4">
+                        <i class="fas fa-dollar-sign prefix text-white"></i>
+                        <input type="text" name="value" id="orangeForm-pass" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="orangeForm-pass">Valor</label>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

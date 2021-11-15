@@ -7,6 +7,7 @@ class Services(db.Model):
     image = db.Column(db.String(250), nullable=False)
     description = db.Column(db.String(250), nullable=False)
     value = db.Column(db.Float, nullable=False)
+    appointments = db.relationship('Appointment', backref='services', lazy=True)
 
     def __init__(self, name=None, image=None, description=None, value=None) -> None:
         self.name = name

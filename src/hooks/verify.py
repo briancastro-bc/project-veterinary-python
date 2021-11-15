@@ -6,7 +6,7 @@ def verify_user(verify_role: bool=False):
     def _verify_user(f):
         @functools.wraps(f)
         def wrapper(*args, **kwargs):
-            if session['user']:
+            if session:
                 if verify_role:
                     user: User = User.query.filter_by(email=session['user']).first()
                     if user.is_admin:

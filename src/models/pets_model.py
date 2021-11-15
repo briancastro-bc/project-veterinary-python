@@ -7,6 +7,7 @@ class Pet(db.Model):
     breed = db.Column(db.String(30), nullable=False)
     age = db.Column(db.Integer(), nullable=False)
     owner = db.Column(db.String(36), db.ForeignKey('users.uid'), nullable=False)
+    appointments = db.relationship('Appointment', backref='pets', lazy=True)
 
     def __init__(self, name=None, breed=None, age=None, owner=None) -> None:
         import uuid
