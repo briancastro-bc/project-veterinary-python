@@ -15,3 +15,4 @@ class AuthBlueprint:
     def __register_routes(cls):
         cls.auth.add_url_rule(auth_routes['login'], view_func=auth_routes['login_controller'], methods=['GET', 'POST'])
         cls.auth.add_url_rule(auth_routes['signup'], view_func=auth_routes['signup_controller'], methods=['GET', 'POST'])
+        cls.auth.add_url_rule(auth_routes['logout'], view_func=auth_routes['logout_controller'], methods=['GET'])

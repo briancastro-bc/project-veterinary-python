@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %}Inicio{% endblock %}
+{% block content%}
+    <main id="main-content">
+        <section class="home" id="home">
+            <div class="container-fluid">
+                <div class="row g-0">
+                    <div class="col-lg-6 d-flex">
+                        <div class="justify-content-center align-items-center align-self-center mx-auto text-center">
+                            <h1 class="h1-responsive">
+                                Nosotros los cuidamos
+                            </h1>
+                            <h2 class="text-muted">Ellos cuidan de ti</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex">
+                        <div class="justify-content-center align-content-center align-self-center mx-auto">
+                            <img src="{{ url_for('static', filename='images/veterinary.png') }}" alt="Imagen representativa de una veterinaria"
+                                class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

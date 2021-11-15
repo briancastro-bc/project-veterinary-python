@@ -1,10 +1,17 @@
-from flask import request
+from flask import render_template
 from flask.views import MethodView
+from src.models import Services
 
 class IndexController(MethodView):
 
+    def get(self):
+        return render_template('public/index.html')
+
+class ServicesController(MethodView):
+    
     def __init__(self) -> None:
-        super().__init__()
+        pass
     
     def get(self):
-        return "Hello World!"
+        services: Services = Services.query.all()
+        return render_template('public/services.html', services=services)

@@ -1,7 +1,7 @@
 from flask import Flask
 from os import getenv
-from src.blueprints import AuthBlueprint
-from src.routes.root_routes import root_routes, error_routes
+from src.blueprints import AuthBlueprint,  AdminBlueprint
+from src.routes.root_routes import root_routes, error_routes, pets_routes
 from src.database import db
 
 class Application:
@@ -35,10 +35,13 @@ class Application:
     @classmethod
     def __register_blueprints(cls) -> None:
         cls.app.register_blueprint(AuthBlueprint.init_blueprint())
+        cls.app.register_blueprint(AdminBlueprint.init_blueprint())
     
     @classmethod
     def __register_root_routes(cls) -> None:
         cls.app.add_url_rule(root_routes['index'], view_func=root_routes['index_controller'], endpoint='index')
+        cls.app.add_url_rule(pets_routes['create'], view_func=pets_routes['create_controller'], methods=['POST'])
+        cls.app.add_url_rule(root_routes['services'], view_func=root_routes['services_controller'], methods=['GET'])
         cls.__register_error_handlers()
     
     @classmethod
